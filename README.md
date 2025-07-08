@@ -13,3 +13,6 @@ Day 2:
     - Have to decide which is more important to me, what's the best practice?
 - For now will grab exactly what I need to not add clutter in main logic for string trimming
 - Finished parsing, moving onto how to store data
+- Finished setting up local varibles that store the parsed data
+    - Created a simple count system for now until I need to add like relationships between IPs & ports or some analyzation logic
+- Starting to work on suspicious IP detection logic (first analysis feature)

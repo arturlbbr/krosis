@@ -20,25 +20,27 @@ def parse_log_line(line):
     else:
         return None
 
+#setting up local dictionaries
+field_count: dict[str, dict[str, int]] = {
+    'ip': {},
+    'date': {},
+    'time': {},
+    'timezone': {},
+    'request_type': {},
+    'request_path': {},
+    'protocol': {},
+    'status_code': {},
+    'port': {}
+}
+
 #main parsing function call
 def parse_log_file(filepath):
-    field_count = {
-        'ip': {},
-        'date': {},
-        'time': {},
-        'timezone': {},
-        'request_type': {},
-        'request_path': {},
-        'protocol': {},
-        'status_code': {},
-        'port': {}
-    }
     with open(filepath, 'r') as file:
+        #loop will take regex group match dictionaries and put them into local dictionaries declared above
         for line in file:
             entry = parse_log_line(line)
             if entry:
                 for key, value in entry.items():
-                    # Count each unique value
                     if value not in field_count[key]:
                         field_count[key][value] = 1
                     else:
@@ -47,4 +49,4 @@ def parse_log_file(filepath):
     return None
 
 #calls
-print(parse_log_file("/Users/churro/Desktop/python/krosis/data/sample_access.log"))
+parse_log_file("/Users/churro/Desktop/python/krosis/data/sample_access.log")

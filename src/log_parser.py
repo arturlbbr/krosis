@@ -1,5 +1,18 @@
 import re
 
+#setting up local dictionaries
+field_count: dict[str, dict[str, int]] = {
+    'ip': {},
+    'date': {},
+    'time': {},
+    'timezone': {},
+    'request_type': {},
+    'request_path': {},
+    'protocol': {},
+    'status_code': {},
+    'port': {}
+}
+
 #line parsing logic
 def parse_log_line(line):
     pattern = r'((?:\d+\.){3}\d+)\s-\s-\s\[(\d{2}\/\d{2}\/\d{2})\:(\d{2}\:\d{2}\:\d{2})\s([+-]\d{4})\]\s\"(\w+)\s([^\s]+)\s([A-Z]+\/\d+\.\d+)\"\s(\d+)\s(\d+)$'
@@ -19,19 +32,6 @@ def parse_log_line(line):
         }
     else:
         return None
-
-#setting up local dictionaries
-field_count: dict[str, dict[str, int]] = {
-    'ip': {},
-    'date': {},
-    'time': {},
-    'timezone': {},
-    'request_type': {},
-    'request_path': {},
-    'protocol': {},
-    'status_code': {},
-    'port': {}
-}
 
 #main parsing function call
 def parse_log_file(filepath):

@@ -22,3 +22,9 @@ Day 3:
 - Adding 3 functionalities to the IP detection logic; count check, subnet(botnet) check, OSINT score check (if I can find a good free api)
     - Decided not to put subnet and count check into one function yet so save on performance since this is going to be such a small script and keep it modular
     - Added ip count check and realized I will prob need a file with all the function calls to add if statements, if I'm returning statements of the same ip being suspicious over multiple functions, need to find a way to return all the things each ip is triggering effeciently (prob common practice)
+
+Day 4:
+- Forgot to push last commit from last time whoops lol
+- Working on second analysis feature (subnet catch)
+    - As I get closer to the data I need, finding that some iterations to pull certain data could be done within the first iteration but could also clutter the initial function, learning to find the balance still.
+    - Finding that shorthand notations are a lot more useful than I thought, need to study up on them

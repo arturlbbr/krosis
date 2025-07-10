@@ -20,7 +20,22 @@ def count_check(log_data):
 def osint_check():
     pass
 
-def subnet_check():
-    pass
+def subnet_check(log_data):
+    subnet_catch = {}
+    for i in log_data["ip"].keys():
+        #this will catch the index of the rightmost period and we slice from there to get the subnet
+        if not (i[:(i.rfind("."))] in subnet_catch):
+            subnet_catch[i[:(i.rfind("."))]] = 1
+            continue
+        else:
+            subnet_catch[i[:(i.rfind("."))]] += 1
+            
+    #might be cursed but iterating through subnet_catch to remove all below sus threshold
+    for i in list(subnet_catch):
+        if subnet_catch[i] <= 3:
+            subnet_catch.pop(i)
+    return f"The following subnets were seen:\n{subnet_catch}"
 
 print(count_check(field_count))
+print("-" * 40)
+print(subnet_check(field_count))

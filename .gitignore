@@ -1,0 +1,10 @@
+venv/
+.DS_Store
+.AppleDouble
+.LSOverride
+.env
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd

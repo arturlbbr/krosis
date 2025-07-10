@@ -28,3 +28,10 @@ Day 4:
 - Working on second analysis feature (subnet catch)
     - As I get closer to the data I need, finding that some iterations to pull certain data could be done within the first iteration but could also clutter the initial function, learning to find the balance still.
     - Finding that shorthand notations are a lot more useful than I thought, need to study up on them
+- Starting API integration using AbuseIPDB to check ip scores
+    - Going to skip over all internal ranges and only check external hosts, dear god don't let me accidentally push my API key
+    - Added ipaddress & requests library for the API call and quickly checking if an ip is private or not
+    - Added os and python-dotenv libraries to make sure you noobs dont get my API key
+    - Learned about walrus operator(:=), pure bliss having the issue of not wanting to rerun the ip_score again or before removing the private ips resolved
+- venv and ds store bloat was annoying me, added a .gitignore file
+- Print statement looking kinda ugly, will make it prettier after all logic is logicing well

@@ -35,3 +35,12 @@ Day 4:
     - Learned about walrus operator(:=), pure bliss having the issue of not wanting to rerun the ip_score again or before removing the private ips resolved
 - venv and ds store bloat was annoying me, added a .gitignore file
 - Print statement looking kinda ugly, will make it prettier after all logic is logicing well
+
+Day 5:
+- Working on attack analysis now, first feature will be checking for SQL injections
+    - This might be common info but now know that SQL injections should never appear in the logs that I am using since these aren't DB logs so can filter out any sort of SQL command seen as malicious without worry
+    - Trying to find a better way to check if any of the request paths are seen with sql commands, nested for loop doesn't seem efficient
+- Realizing big issue, doing the count on during parsing and deleting all the extra ips makes me lose the correlations, need to still be able to check what ip did what activity at any point.
+    - Having to refactor everything, changed the parsing logic to just adding a dictionary of each parsed log into an array since I'm not going to have a massive amount of data anyways
+    - FINALLY finished refactoring, brain absolutely fried, found some cool new ways to condense/shorthand some code along the way though like dictionary comprehensions
+- Big day, completely refactored all my code, used much more shorthand notations for things, and finished another analysis feature

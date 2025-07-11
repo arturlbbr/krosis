@@ -1,18 +1,5 @@
 import re
 
-#setting up local dictionaries
-field_count: dict[str, dict[str, int]] = {
-    'ip': {},
-    'date': {},
-    'time': {},
-    'timezone': {},
-    'request_type': {},
-    'request_path': {},
-    'protocol': {},
-    'status_code': {},
-    'port': {}
-}
-
 #line parsing logic
 def parse_log_line(line):
     pattern = r'((?:\d+\.){3}\d+)\s-\s-\s\[(\d{2}\/\d{2}\/\d{2})\:(\d{2}\:\d{2}\:\d{2})\s([+-]\d{4})\]\s\"(\w+)\s([^\s]+)\s([A-Z]+\/\d+\.\d+)\"\s(\d+)\s(\d+)$'
@@ -35,18 +22,13 @@ def parse_log_line(line):
 
 #main parsing function call
 def parse_log_file(filepath):
+    log_entries = []
     with open(filepath, 'r') as file:
-        #loop will take regex group match dictionaries and put them into local dictionaries declared above
         for line in file:
             entry = parse_log_line(line)
             if entry:
-                for key, value in entry.items():
-                    if value not in field_count[key]:
-                        field_count[key][value] = 1
-                    else:
-                        field_count[key][value] += 1
-        return field_count
-    return None
+                log_entries.append(entry)
+    return log_entries
 
 #calls
 parse_log_file("/Users/churro/Desktop/python/krosis/data/sample_access.log")

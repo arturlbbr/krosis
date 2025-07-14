@@ -46,16 +46,18 @@ Day 5:
 - Big day, completely refactored all my code, used much more shorthand notations for things, and finished another analysis feature
 
 Day 6:
-- got a stye in my eye i wanna die, break day
-
-Day 7:
 - Started working on next analysis feature, checking for brute force
     - Most likely will be very simple, so trying to find a way to do dictionary entry checks and the status code check in only one for loop
     - indeed did not find a way because i still need to make the GUI
 - Made the off-hours analysis function as well, very simple using the datetime library to modify the dates/times into anything i need
 - Starting to work on the GUI, most likely will use customtkinter since I've used it before
     - found some stackoverflows with lots of good references which streamlined creating everthing.
-    - ended up making the krosis app a class so call make more sense tell me why remember to type self. before everything is so hard
+    - ended up making the krosis app a class so calls make more sense, tell me why remembering to type self. before everything is so hard
     - created a config file where users can save settings or reset to default
+    - copied a lot of code/logic from a previous project sorry not sorry
 - FINISHED MAIN GUI LOGIC LETS GOOOOOOOOOOOOOOOOO
     - making it prettier tomorrow im so fried i can't write any more code
+
+Day 7:
+- Fixed up some main logic issues where things weren't printing the way I wanted in the GUI
+- Made outputs prettier by iterating over a print array in the return statement

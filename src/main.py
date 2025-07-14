@@ -23,7 +23,7 @@ class KrosisApp:
             "ip_count_threshold_20": 20,
             "abuse_score_threshold": 40,
             "subnet_threshold": 3,
-            "brute_force_threshold": 15,
+            "brute_force_threshold": 5,
             "work_days_start": 4,
             "work_days_end": 6,
         }
@@ -107,7 +107,7 @@ class KrosisApp:
         title.pack(pady=20)
 
         #button creations
-        button_frame = ctk.CTkFrame(self.attack_analyzer_tab)
+        button_frame = ctk.CTkFrame(self.attack_analyzer_tab, fg_color="#1A1A1A")
         button_frame.pack(pady=20, padx=20, fill="x")
 
         sql_btn = ctk.CTkButton(button_frame, text="SQL Injection Detection",
@@ -392,7 +392,7 @@ class KrosisApp:
             "ip_count_threshold_20": 20,
             "abuse_score_threshold": 40,
             "subnet_threshold": 3,
-            "brute_force_threshold": 15,
+            "brute_force_threshold": 5,
             "work_days_start": 4,
             "work_days_end": 6,
         }

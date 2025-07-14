@@ -3,19 +3,19 @@ from log_parser import parse_log_file
 
 def detect_sql_injection(log_data):
     malicious_sql = ("'", "or", "select", "union", "drop", "delete", "insert", "1=1", "--", "/*", "*/", ";")
-    ip_list = []
-    port_list = []
-    status_code_list = []
+    print_array = []
+    duplicate_check = []
     for i in log_data:
         for pattern in malicious_sql:
             if pattern in i["request_path"]:
-                ip_list.append(i["ip"])
-                port_list.append(i["port"])
-                status_code_list.append(i["status_code"])
-    return f"The following actors were found using malicious SQL injections:\nips:{ip_list}\nports:{port_list}\nstatus code:{status_code_list}"
+                duplicate_check.append(i["ip"])
+                print_array.append(i["ip"] +  " tried the SQL injection '" + i["request_path"] + "' over port " + i["port"])
+                
+    return "The following actors were found using malicious SQL injections:\n" + "\n".join(f" {actor}" for actor in print_array)
 
 def brute_force(log_data, threshold=5):
     attacker_ips = {}
+    print_array = []
     for i in log_data:
         if (i["status_code"] in ["401","403"]):
             if not i["ip"] in attacker_ips:
@@ -24,14 +24,15 @@ def brute_force(log_data, threshold=5):
                 attacker_ips[i["ip"]] += 1
         else:
             continue
-        
+
     for i in attacker_ips.copy().items():
-        if i[1] >= threshold:
+        if i[1] <= threshold:
             continue
         else:
-            attacker_ips.pop(i[0])
-            
-    return f"The following host(s) return brute force activity:\n{attacker_ips}"
+            #0 is the ip and 1 is how many times detected
+            print_array.append(str(i[0]) + " was detected " + str(i[1]) + " times.")
+
+    return "The following host(s) return brute force activity:\n" + "\n".join(f" {ip}" for ip in print_array)
 
 def off_hours(log_data, day_start_threshold=4, day_end_threshold=6):
     print_array = []
@@ -40,5 +41,5 @@ def off_hours(log_data, day_start_threshold=4, day_end_threshold=6):
         temp_time = datetime.strptime(i["time"], "%H:%M:%S")
         datetime_combiner = str(temp_date.date()) + " " + str(temp_time.time())
         if not temp_date.weekday() in range(day_start_threshold, day_end_threshold):
-            print_array.append(datetime_combiner)
-    return f"Anomalous traffic was found outside of normal hours:\n{print_array}"
+            print_array.append(i["ip"] + " tried connecting at: " + datetime_combiner)
+    return "Anomalous traffic was found outside of normal hours:\n" + "\n".join(f" {time}" for time in print_array)

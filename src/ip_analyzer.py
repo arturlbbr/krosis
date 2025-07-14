@@ -47,16 +47,19 @@ def osint_check(log_entries, score_threshold=40):
     unique_ips = set(entry['ip'] for entry in log_entries)
 
     malicious_ips = {}
+    print_array = []
     for ip in unique_ips:
         if ipaddress.ip_address(ip).is_private:
             continue
         #the := operator allows me to set the variable as the ip_score return value within the if statement, poggers
         elif (ip_score_temp := ip_score(ip)) >= score_threshold:
             malicious_ips[ip] = ip_score_temp
-    return f"The following ips return as malicious per OSINT tools:\n{malicious_ips}"
+            print_array.append("Malicious ip " + ip + " was found to be malicious with a score of: " + str(ip_score_temp))
+    return "The following ips return as malicious per OSINT tools:\n" + "\n".join(f" {ip}" for ip in print_array)
 
 def subnet_check(log_entries, subnet_threshold=3):
     subnet_catch = {}
+    print_array = []
     for entry in log_entries:
         ip = entry['ip']
         #this will catch the index of the rightmost period and we slice from there to get the subnet
@@ -65,4 +68,9 @@ def subnet_check(log_entries, subnet_threshold=3):
 
     #found a cool way to iterate through the subnets and check which ones pass the threshold called dictionary comprehensions
     subnet_catch = {k: v for k, v in subnet_catch.items() if v > subnet_threshold}
-    return f"The following subnets were seen:\n{subnet_catch}"
+    for i in subnet_catch.items():
+        print_array.append("Subnet " + i[0] + " was seen " + str(i[1]) + " times.")
+    return "The following subnets were seen:\n" + "\n".join(f" {subnet}" for subnet in print_array)
+
+field_data = parse_log_file("/Users/churro/Desktop/python/krosis/data/sample_access.log")
+print(osint_check(field_data))

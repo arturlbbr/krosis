@@ -5,7 +5,7 @@
   "ip_count_threshold_20": 20,
   "abuse_score_threshold": 40,
   "subnet_threshold": 3,
-  "brute_force_threshold": 15,
+  "brute_force_threshold": 5,
   "work_days_start": 4,
   "work_days_end": 6
 }
